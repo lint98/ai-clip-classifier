@@ -9,7 +9,7 @@ Render에 배포 가능 (Python 3.10 기준)
 uvicorn app.main:app --reload
 ```
 
-## 주요 경로
+## api
 
 - `POST /classify` - 이미지 테마 분류
 - `GET /ping` - 상태 확인
