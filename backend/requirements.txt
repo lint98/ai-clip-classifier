@@ -4,3 +4,5 @@ transformers
 torch
 pillow
 python-multipart
+moviepy==1.0.3
+opencv-python-headless

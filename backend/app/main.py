@@ -1,6 +1,9 @@
-from fastapi import FastAPI, UploadFile, File
+# main.py
+from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from app.classify import classify_images
+from app.slideshow import generate_slideshow
+from fastapi.responses import FileResponse
 
 app = FastAPI()
 
@@ -20,3 +23,11 @@ async def ping():
 async def classify(files: list[UploadFile] = File(...)):
     results = await classify_images(files)
     return {"results": results}
+
+@app.post("/generate-slideshow")
+async def generate_slideshow_api(
+    files: list[UploadFile] = File(...),
+    prompt: str = Form("")
+):
+    video_path = await generate_slideshow(files, prompt)
+    return FileResponse(video_path, media_type="video/mp4", filename="slideshow.mp4")
